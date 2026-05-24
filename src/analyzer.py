@@ -41,15 +41,16 @@ def analyze_content(title: str, summary: str, source_name: str) -> Optional[dict
 """
     try:
         import requests
+        base_url = os.getenv("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
         resp = requests.post(
-            "https://api.anthropic.com/v1/messages",
+            f"{base_url}/v1/messages",
             headers={
                 "x-api-key": api_key,
                 "anthropic-version": "2023-06-01",
                 "content-type": "application/json",
             },
             json={
-                "model": os.getenv("CLAUDE_MODEL", "claude-3-haiku-20240307"),
+                "model": os.getenv("CLAUDE_MODEL", "deepseek-chat"),
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": prompt}],
             },
