@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 安装 lark-cli
-        run: npm install -g @larksuiteoapi/lark-cli
+        run: npm install -g @larksuite/cli
 
       - name: 运行信源扫描
         env:
