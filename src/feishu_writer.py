@@ -70,6 +70,7 @@ def _write_via_larkcli(base_token: str, table_id: str, record: dict) -> bool:
     """
     通过 lark-cli 写入。
     @file 语法只支持当前目录的相对路径，所以临时文件建在 CWD 而非系统 temp 目录。
+    CI 环境（有 FEISHU_APP_ID）时自动使用 --as bot 身份。
     """
     lark_cli = os.getenv("LARK_CLI_PATH", "lark-cli")
     tmp_name = f"__lark_{os.getpid()}.json"
@@ -78,14 +79,16 @@ def _write_via_larkcli(base_token: str, table_id: str, record: dict) -> bool:
         with open(tmp_name, "w", encoding="utf-8") as f:
             f.write(payload)
 
-        result = subprocess.run(
-            [lark_cli, "base", "+record-upsert",
-             "--base-token", base_token,
-             "--table-id", table_id,
-             "--json", f"@{tmp_name}"],
-            capture_output=True, text=False, timeout=15,
-        )
-        # 无论成功与否都清理临时文件
+        cmd = [lark_cli, "base", "+record-upsert",
+               "--base-token", base_token,
+               "--table-id", table_id,
+               "--json", f"@{tmp_name}"]
+        # CI 环境用 bot 身份（读取 FEISHU_APP_ID / FEISHU_APP_SECRET）
+        if os.getenv("FEISHU_APP_ID"):
+            cmd.insert(1, "--as")
+            cmd.insert(2, "bot")
+
+        result = subprocess.run(cmd, capture_output=True, text=False, timeout=15)
         if os.path.exists(tmp_name):
             os.unlink(tmp_name)
 
