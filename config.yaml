@@ -9,8 +9,8 @@ feishu:
 
 # --- AI 分析配置 ---
 ai:
-  provider: "claude"       # claude 或 openai
-  model: "claude-3-haiku-20240307"  # 用 Haiku 速度快成本低
+  provider: "claude"
+  model: "deepseek-chat"
   max_tokens: 1024
 
 # --- 播客信源（通过 Apple Podcasts ID 自动获取 RSS）---
@@ -31,7 +31,7 @@ podcasts:
     apple_id: 1794555025
     host: "ISES"
   - name: "High-Performance Equestrian"
-    rss_url: "https://d3181cv23ky2c4.cloudfront.net/podcast/imadb"
+    apple_id: 1593102612
     host: "Dr. Fiona Hargraves"
   - name: "CEN Horse Nutrition"
     rss_url: "https://anchor.fm/s/1c16e0d8/podcast/rss"
@@ -40,7 +40,7 @@ podcasts:
 # --- 博客/网站信源 ---
 blogs:
   - name: "The Horse"
-    rss_url: "https://feeds.thehorse.com/TheHorse/News"
+    rss_url: "https://thehorse.com/feed/"
   - name: "Mad Barn"
     rss_url: "https://madbarn.ca/feed/"       # 常见 WordPress RSS 路径
     fallback_url: "https://madbarn.ca/blog/"   # 无 RSS 时用网页抓取
