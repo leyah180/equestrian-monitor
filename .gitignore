@@ -1,6 +1,9 @@
 # 环境变量
 .env
 
+# lark-cli 临时 JSON 文件
+__lark_*.json
+
 # 运行时指纹缓存
 .seen_fingerprints.txt
 

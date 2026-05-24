@@ -67,7 +67,16 @@ def analyze_content(title: str, summary: str, source_name: str) -> Optional[dict
             text = text.rsplit("\n", 1)[0]
             if text.endswith("```"):
                 text = text[:-3]
-        return json.loads(text.strip())
+        text = text.strip()
+
+        # 尝试解析，失败时清理控制字符后重试
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            # 移除非转义的控制字符（如 AI 返回的原始换行符）
+            import re
+            cleaned = re.sub(r'[\x00-\x1f\x7f]', '', text)
+            return json.loads(cleaned.strip())
 
     except Exception as e:
         logger.error(f"AI 分析失败: {e}")
