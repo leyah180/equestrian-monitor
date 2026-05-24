@@ -1,0 +1,16 @@
+# 环境变量
+.env
+
+# 运行时指纹缓存
+.seen_fingerprints.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
