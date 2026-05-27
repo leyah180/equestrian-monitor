@@ -7,12 +7,6 @@ feishu:
   base_token: "A3RTbSSoZa4VC6s7PtFcGbGgnke"
   table_id: "tblk3KJMEi32b2h8"       # 内容中台
 
-# --- AI 分析配置 ---
-ai:
-  provider: "claude"
-  model: "deepseek-chat"
-  max_tokens: 1024
-
 # --- 播客信源（通过 Apple Podcasts ID 自动获取 RSS）---
 podcasts:
   - name: "Horse Person"

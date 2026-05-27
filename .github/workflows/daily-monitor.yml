@@ -21,9 +21,6 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 安装 lark-cli
-        run: npm install -g @larksuite/cli
-
       - name: 运行信源扫描
         env:
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}

@@ -50,7 +50,7 @@ def _clean_html(text: str) -> str:
     """移除 HTML 标签（保留纯文本）"""
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
-    return text[:500]  # 摘要控制在 500 字内
+    return text[:3000]  # 供 Workflow AI 分析，保留更多原文内容
 
 
 def is_recent(published_parsed, lookback_hours: int = 168) -> bool:
