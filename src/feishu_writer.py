@@ -52,7 +52,7 @@ def _write_via_api(base_token: str, table_id: str, record: dict) -> bool:
         resp = requests.post(
             url,
             headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-            json={"fields": record},
+            json=record,
             timeout=10,
         )
         data = resp.json()
